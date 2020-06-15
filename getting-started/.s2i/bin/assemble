@@ -1,0 +1,11 @@
+#!/bin/bash
+/usr/local/s2i/assemble
+echo -e "\t\tTHIS IS WORKING THIS IS WORKING\t\t"
+rc=$?
+if [ $rc -eq 0 ]; then
+    mkdir /deployments/jolokia
+    curl -Lo /deployments/jolokia/jolokia-agent.jar \
+        'https://search.maven.org/remotecontent?filepath=org/jolokia/jolokia-jvm/1.6.2/jolokia-jvm-1.6.2-agent.jar'
+    touch /deployments/jolokia/jolokia.properties
+fi
+exit $rc
